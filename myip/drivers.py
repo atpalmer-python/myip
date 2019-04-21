@@ -26,8 +26,16 @@ class DyndnsDriver(object):
         return matches.group(1)
 
 
+class HttpbinDriver(object):
+    @property
+    def ip(self):
+        response = requests.get('http://httpbin.org/ip')
+        data = response.json()
+        return data['origin']
+
+
 class Drivers(object):
-    choices = ('ipify', 'myexternalip', 'dyndns')
+    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin')
     default = 'ipify'
 
     def ipify(self):
@@ -38,3 +46,6 @@ class Drivers(object):
 
     def dyndns(self):
         return DyndnsDriver()
+
+    def httpbin(self):
+        return HttpbinDriver()
