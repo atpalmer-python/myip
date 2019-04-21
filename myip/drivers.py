@@ -35,8 +35,16 @@ class HttpbinDriver(object):
         return data['origin']
 
 
+class IpechoDriver(object):
+    @property
+    def ip(self):
+        response = requests.get('https://ipecho.net/json')
+        data = response.json()
+        return data['ip']
+
+
 class Drivers(object):
-    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin')
+    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin', 'ipecho')
 
     @classmethod
     def random(cls):
@@ -53,3 +61,6 @@ class Drivers(object):
 
     def httpbin(self):
         return HttpbinDriver()
+
+    def ipecho(self):
+        return IpechoDriver()
