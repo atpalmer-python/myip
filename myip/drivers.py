@@ -1,3 +1,4 @@
+import re
 import requests
 
 
@@ -17,8 +18,16 @@ class MyexternalipDriver(object):
         return data['ip']
 
 
+class DyndnsDriver(object):
+    @property
+    def ip(self):
+        response = requests.get('http://checkip.dyndns.org/')
+        matches = re.search('Current IP Address: ([0-9\.]+)', response.text)
+        return matches.group(1)
+
+
 class Drivers(object):
-    choices = ('ipify', 'myexternalip')
+    choices = ('ipify', 'myexternalip', 'dyndns')
     default = 'ipify'
 
     def ipify(self):
@@ -26,3 +35,6 @@ class Drivers(object):
 
     def myexternalip(self):
         return MyexternalipDriver()
+
+    def dyndns(self):
+        return DyndnsDriver()
