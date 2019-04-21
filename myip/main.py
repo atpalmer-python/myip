@@ -5,7 +5,7 @@ from .drivers import Drivers
 
 def get_args():
     parser = ArgumentParser()
-    parser.add_argument('--driver', choices=Drivers.choices, default=Drivers.default)
+    parser.add_argument('--driver', choices=Drivers.choices, default=Drivers.random())
     parser.add_argument('--debug', action='store_true', default=False)
     return parser.parse_args()
 

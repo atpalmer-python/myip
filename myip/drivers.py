@@ -1,3 +1,4 @@
+import random
 import re
 import requests
 
@@ -36,7 +37,10 @@ class HttpbinDriver(object):
 
 class Drivers(object):
     choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin')
-    default = 'ipify'
+
+    @classmethod
+    def random(cls):
+        return random.choice(cls.choices)
 
     def ipify(self):
         return IpifyDriver()
