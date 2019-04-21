@@ -43,8 +43,15 @@ class IpechoDriver(object):
         return data['ip']
 
 
+class IcanhazipDriver(object):
+    @property
+    def ip(self):
+        response = requests.get('http://icanhazip.com/')
+        return str(response.text).strip()
+
+
 class Drivers(object):
-    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin', 'ipecho')
+    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin', 'ipecho', 'icanhazip')
 
     @classmethod
     def random(cls):
@@ -64,3 +71,6 @@ class Drivers(object):
 
     def ipecho(self):
         return IpechoDriver()
+
+    def icanhazip(self):
+        return IcanhazipDriver()
