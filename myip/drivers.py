@@ -47,7 +47,7 @@ class IcanhazipDriver(object):
     @property
     def ip(self):
         response = requests.get('http://icanhazip.com/')
-        return str(response.text).strip()
+        return response.text.strip()
 
 
 class AmazonAwsDriver(object):
