@@ -50,8 +50,15 @@ class IcanhazipDriver(object):
         return str(response.text).strip()
 
 
+class AmazonAwsDriver(object):
+    @property
+    def ip(self):
+        response = requests.get('https://checkip.amazonaws.com/')
+        return response.text.strip()
+
+
 class Drivers(object):
-    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin', 'ipecho', 'icanhazip')
+    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin', 'ipecho', 'icanhazip', 'aws')
 
     @classmethod
     def random(cls):
@@ -74,3 +81,6 @@ class Drivers(object):
 
     def icanhazip(self):
         return IcanhazipDriver()
+
+    def aws(self):
+        return AmazonAwsDriver()
