@@ -61,6 +61,12 @@ def identme():
     return response.text
 
 
+@Driver
+def ifconfigme():
+    response = requests.get('https://ifconfig.me/ip')
+    return response.text
+
+
 _DRIVERS = {
     attr.name: attr
     for attr in globals().values()
