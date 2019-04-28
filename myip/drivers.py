@@ -55,6 +55,12 @@ def aws():
     return response.text.strip()
 
 
+@Driver
+def identme():
+    response = requests.get('https://ident.me')
+    return response.text
+
+
 _DRIVERS = {
     attr.name: attr
     for attr in globals().values()
