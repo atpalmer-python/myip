@@ -33,7 +33,7 @@ def dyndns():
 def httpbin():
     response = requests.get('http://httpbin.org/ip')
     data = response.json()
-    return data['origin']
+    return data['origin'].partition(',')[0]
 
 
 @Driver
