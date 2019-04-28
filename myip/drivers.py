@@ -1,5 +1,5 @@
 import re
-import requests
+from .requests_wrapper import requests_wrapper as requests
 
 
 class Driver(object):
