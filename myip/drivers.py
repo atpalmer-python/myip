@@ -57,13 +57,7 @@ class AmazonAwsDriver(object):
         return response.text.strip()
 
 
-class Drivers(object):
-    choices = ('ipify', 'myexternalip', 'dyndns', 'httpbin', 'ipecho', 'icanhazip', 'aws')
-
-    @classmethod
-    def random(cls):
-        return random.choice(cls.choices)
-
+class _Drivers(object):
     def ipify(self):
         return IpifyDriver()
 
@@ -84,3 +78,15 @@ class Drivers(object):
 
     def aws(self):
         return AmazonAwsDriver()
+
+
+class Drivers(object):
+    drivers = _Drivers()
+    choices = tuple(attr for attr in dir(drivers) if not attr.startswith('_'))
+
+    @classmethod
+    def random(cls):
+        return random.choice(cls.choices)
+
+    def __getattr__(self, attr):
+        return getattr(self.drivers, attr)
