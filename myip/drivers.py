@@ -1,50 +1,69 @@
-import random
 import re
 import requests
 
 
-class _Drivers(object):
-    def ipify(self):
-        response = requests.get('https://api.ipify.org?format=json')
-        data = response.json()
-        return data['ip']
-
-    def myexternalip(self):
-        response = requests.get('https://myexternalip.com/json')
-        data = response.json()
-        return data['ip']
-
-    def dyndns(self):
-        response = requests.get('http://checkip.dyndns.org/')
-        matches = re.search('Current IP Address: ([0-9\.]+)', response.text)
-        return matches.group(1)
-
-    def httpbin(self):
-        response = requests.get('http://httpbin.org/ip')
-        data = response.json()
-        return data['origin']
-
-    def ipecho(self):
-        response = requests.get('https://ipecho.net/json')
-        data = response.json()
-        return data['ip']
-
-    def icanhazip(self):
-        response = requests.get('http://icanhazip.com/')
-        return response.text.strip()
-
-    def aws(self):
-        response = requests.get('https://checkip.amazonaws.com/')
-        return response.text.strip()
+class Driver(object):
+    def __init__(self, get_ip_func):
+        self.name = get_ip_func.__name__
+        self.get_ip = get_ip_func
 
 
-class Drivers(object):
-    drivers = _Drivers()
-    choices = tuple(attr for attr in dir(drivers) if not attr.startswith('_'))
+@Driver
+def ipify():
+    response = requests.get('https://api.ipify.org?format=json')
+    data = response.json()
+    return data['ip']
 
-    @classmethod
-    def random(cls):
-        return random.choice(cls.choices)
 
-    def __getattr__(self, attr):
-        return getattr(self.drivers, attr)
+@Driver
+def myexternalip():
+    response = requests.get('https://myexternalip.com/json')
+    data = response.json()
+    return data['ip']
+
+
+@Driver
+def dyndns():
+    response = requests.get('http://checkip.dyndns.org/')
+    matches = re.search('Current IP Address: ([0-9\.]+)', response.text)
+    return matches.group(1)
+
+
+@Driver
+def httpbin():
+    response = requests.get('http://httpbin.org/ip')
+    data = response.json()
+    return data['origin']
+
+
+@Driver
+def ipecho():
+    response = requests.get('https://ipecho.net/json')
+    data = response.json()
+    return data['ip']
+
+
+@Driver
+def icanhazip():
+    response = requests.get('http://icanhazip.com/')
+    return response.text.strip()
+
+
+@Driver
+def aws():
+    response = requests.get('https://checkip.amazonaws.com/')
+    return response.text.strip()
+
+
+_DRIVERS = {
+    attr.name: attr
+    for attr in globals().values()
+    if isinstance(attr, Driver)
+}
+
+
+CHOICES = tuple(_DRIVERS.keys())
+
+
+def get_ip(driver_name):
+    return _DRIVERS[driver_name].get_ip()
