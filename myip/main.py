@@ -12,7 +12,7 @@ def get_args():
 
 def get_driver(driver_name):
     drivers = Drivers()
-    return getattr(drivers, driver_name)()
+    return getattr(drivers, driver_name)
 
 
 def main():
@@ -20,4 +20,4 @@ def main():
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
     driver = get_driver(args.driver)
-    print(driver.ip)
+    print(driver())
