@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
-from time import time
 
 
 setup(
     name='myip',
-    version=int(time()),
+    version='2019.4.28',
     description='Queries internet resources for your current external IP address.',
     author='Andy Palmer',
     author_email='andrew.t.palmer@parker.com',
