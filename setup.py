@@ -5,6 +5,7 @@ setup(
     name='myip',
     version='2019.4.28',
     description='Queries internet resources for your current external IP address.',
+    url='https://github.com/atpalmer/myip',
     author='Andy Palmer',
     author_email='andrew.t.palmer@parker.com',
     packages=find_packages(),
