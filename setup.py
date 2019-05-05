@@ -7,7 +7,7 @@ setup(
     description='Queries internet resources for your current external IP address.',
     url='https://github.com/atpalmer/myip',
     author='Andy Palmer',
-    author_email='andrew.t.palmer@parker.com',
+    author_email='atp@sdf.org',
     packages=find_packages(),
     entry_points={
         'console_scripts': ['myip=myip.main:main'],
