@@ -21,3 +21,10 @@ A specific driver may be applied using the `--driver` flag:
 A list of available drivers is available using help:
 
     myip --help
+
+The `--debug` flag will show debug info for the underlying HTTP library (urllib3):
+
+    $ myip --debug
+    DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): icanhazip.com:80
+    DEBUG:urllib3.connectionpool:http://icanhazip.com:80 "GET / HTTP/1.1" 200 15
+    98.227.173.157
