@@ -10,4 +10,10 @@ Install the latest version from this repository:
 
 ## Usage
 
+Simple usage:
+
     myip
+
+A specific driver may be applied using the `--driver` flag:
+
+    myip --driver httpbin
