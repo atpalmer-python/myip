@@ -17,3 +17,7 @@ Simple usage:
 A specific driver may be applied using the `--driver` flag:
 
     myip --driver httpbin
+
+A list of available drivers is available using help:
+
+    myip --help
