@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='myip',
-    version='2019.4.28',
+    version='2020.9.13',
     description='Queries internet resources for your current external IP address.',
-    url='https://github.com/atpalmer/myip',
+    url='https://github.com/atpalmer-python/myip',
     author='Andy Palmer',
     author_email='atp@sdf.org',
     packages=find_packages(),
