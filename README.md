@@ -4,9 +4,10 @@ Query internet resources to determine your external IP address.
 
 ## Installation
 
-Install the latest version from this repository:
+Clone the latest version of this repository and install:
 
-    pip install https://github.com/atpalmer/myip#egg=myip --user
+    git clone https://github.com/atpalmer-python/myip.git
+    python3 -m pip install myip --user
 
 ## Usage
 
