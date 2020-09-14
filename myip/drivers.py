@@ -38,7 +38,7 @@ def httpbin():
 
 @Driver
 def ipecho():
-    response = requests.get('https://ipecho.net/json')
+    response = requests.get('https://ipecho.io/json')
     data = response.json()
     return data['ip']
 
